@@ -3,17 +3,24 @@ vim.pack.add({
   "https://github.com/nvim-lualine/lualine.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/kepano/flexoki-neovim",
   "https://github.com/catgoose/nvim-colorizer.lua",
+  "https://github.com/saghen/blink.lib",
+  "https://github.com/Saghen/blink.cmp",
+  "https://github.com/Saghen/blink.indent",
+  "https://github.com/bluz71/vim-moonfly-colors",
+
 })
 
-lualine = require('lualine').setup()
+vim.cmd [[colorscheme moonfly]]
 
-require('nvim-treesitter').setup {
-  -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
-  install_dir = vim.fn.stdpath('data') .. '/site'
+lualine = require('lualine').setup{
+  options = { section_separators = '', component_separators = '' }
 }
 
-require('nvim-treesitter').install{"lua", "cpp", "c"}
-
 require('colorizer').setup()
+
+local cmp = require('blink.cmp')
+
+cmp.build():pwait()
+cmp.setup()
+
